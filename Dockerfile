@@ -1,15 +1,13 @@
-FROM node:20-slim
+FROM node:20
 
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm ci --omit=dev
+COPY package.json ./
+RUN npm install --omit=dev
 
 COPY server.js ./
 COPY initiative-advisor.html ./
 
 ENV NODE_ENV=production
-
-EXPOSE 8080
 
 CMD ["node", "server.js"]
